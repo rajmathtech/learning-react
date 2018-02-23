@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shoukd render create object page component 1`] = `
+<div
+  className="container__main"
+>
+  <h1
+    className="heading-primary"
+  >
+     Welcome to Create Object
+  </h1>
+  <ObjectForm
+    object={Object {}}
+    onSubmitForm={[Function]}
+  />
+</div>
+`;

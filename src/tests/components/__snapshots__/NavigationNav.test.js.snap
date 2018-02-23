@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component 1`] = `
+<nav
+  className="navigation"
+>
+  <ul
+    className="navigation__list"
+  >
+    <li
+      className="navigation__item"
+    >
+      <NavLink
+        activeClassName="active-link"
+        ariaCurrent="true"
+        className="navigation__link"
+        exact={true}
+        to="/"
+      >
+        Home
+      </NavLink>
+    </li>
+    <li
+      className="navigation__item"
+    >
+      <NavLink
+        activeClassName="active-link"
+        ariaCurrent="true"
+        className="navigation__link"
+        to="/create"
+      >
+        Create
+      </NavLink>
+    </li>
+  </ul>
+</nav>
+`;

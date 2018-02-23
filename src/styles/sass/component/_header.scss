@@ -1,0 +1,7 @@
+.active-link {
+    &:link, &:visited{
+        background-color: green;
+        color: blue !important;
+    }
+    
+}

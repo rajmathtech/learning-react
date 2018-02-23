@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render objects component 1`] = `
+<div
+  className="container__main"
+>
+  <h1
+    className="heading-primary"
+  >
+     Welcome to Objects list 
+  </h1>
+  <Connect(Objects) />
+</div>
+`;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component 1`] = `
+<div
+  className="singleObject"
+>
+  <Link
+    className="objectLink"
+    replace={false}
+    to="display/2"
+  >
+    OBJECT TWO
+  </Link>
+</div>
+`;

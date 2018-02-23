@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with no objects passed 1`] = `
+<div
+  className="objects-container"
+>
+  <Connect(ObjectsFilter) />
+  <p>
+     no object found! 
+  </p>
+</div>
+`;
+
+exports[`should render with objects passed 1`] = `
+<div
+  className="objects-container"
+>
+  <Connect(ObjectsFilter) />
+  <ObjectSingle
+    key="1"
+    object={
+      Object {
+        "amount": 400,
+        "createdAt": -345600000,
+        "details": " details of object one",
+        "id": "1",
+        "title": "object one",
+      }
+    }
+  />
+  <ObjectSingle
+    key="2"
+    object={
+      Object {
+        "amount": 300,
+        "createdAt": 0,
+        "details": " details of object two",
+        "id": "2",
+        "title": "object two",
+      }
+    }
+  />
+  <ObjectSingle
+    key="3"
+    object={
+      Object {
+        "amount": 500,
+        "createdAt": 345600000,
+        "details": " details of object three",
+        "id": "3",
+        "title": "object three",
+      }
+    }
+  />
+</div>
+`;

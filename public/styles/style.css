@@ -1,0 +1,94 @@
+*, *::after, *::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 62.5%;
+}
+body{
+    box-sizing: border-box;
+    padding: 2rem;
+}
+h1{
+    font-size: 4rem;
+    text-align: center;
+    background-color: gray;
+    color:white;
+}
+.container {
+    height: 80vh;
+    background: rgba(240, 248, 255, 0.644);
+    font-size: 4rem;
+}
+.count-grid {
+    display: grid;
+    /* grid-template-columns: [col-start-1] 1fr [col-end-1 col-start-2] 1fr [col-end]; */
+    grid-template-columns: repeat(2, [col-start] 1fr [col-end]);
+    grid-template-rows: repeat(3, 20vh);
+    grid-gap: 1rem;
+}
+.count{
+    /* grid-column: col-start-1 / col-end; */
+    grid-column: col-start 1 / col-end 2;
+    grid-row: 1 / 2;
+    justify-self: center;
+    margin-top: 1rem;
+    /* justify-self: center;
+    align-self: center; */
+    background-color: blue;
+    color:white;
+    font-size: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    width: 50%;
+    text-align: center;
+
+}
+.num{
+    color:red;
+    /* font-size: 4rem; */
+    width: 10rem;
+    display: inline-block;
+    background-color: white;
+    justify-self: start;
+}
+.btn-up{
+    /* grid-column: col-start-1 / col-end-1; */
+    grid-column: col-start 1 / col-end 1;
+    grid-row: 2 / 3;
+}
+.btn-down{
+    /* grid-column: col-start-2 / col-end; */
+    grid-column: col-start 2 / col-end 2;
+    grid-row: 2 / 3;
+}
+.reset{
+    /* grid-column: col-start-1 / col-end; */
+    grid-column: col-start 1 / col-end 2;
+    grid-row: 3 / -1;
+
+}
+/* visiblity toggle */
+button {
+    font-size: inherit;
+}
+input {
+    font-size: inherit;
+    color:red;
+    padding:1rem;
+}
+input:focus::-webkit-input-placeholder{
+    color:blue;
+    opacity: 0;
+    visibility: hidden;
+    
+}
+/* expense app */
+ol{
+    font-size: 2rem;
+    padding:2rem;
+}

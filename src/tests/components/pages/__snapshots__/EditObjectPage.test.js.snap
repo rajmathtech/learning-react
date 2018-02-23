@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Edit object page component 1`] = `
+<div
+  className="container__main"
+>
+  <h1
+    className="heading-primary"
+  >
+     Welcome to Edit Object
+  </h1>
+  <ObjectForm
+    object={
+      Object {
+        "amount": 300,
+        "createdAt": 0,
+        "details": " details of object two",
+        "id": "2",
+        "title": "object two",
+      }
+    }
+    onSubmitForm={[Function]}
+  />
+</div>
+`;
