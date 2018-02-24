@@ -3,8 +3,7 @@ import ObjectForm from '../ObjectForm';
 import {connect} from 'react-redux';
 import { editObject }  from '../../redux/actions/object';
 export class EditObjectPage extends React.Component{
-    onSubmitForm = (update) => {
-        
+    onSubmitForm = (update) => {    
         this.props.editObject(this.props.object, update);
         this.props.history.push('/');
     };
