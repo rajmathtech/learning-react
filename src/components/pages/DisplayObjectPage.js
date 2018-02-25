@@ -22,7 +22,8 @@ const DisplayObjectPage = (props) => {
             <h1> Welcome to Edit Object Page</h1>
             <h2>{obj.details}</h2>
             <h3>{moment(obj.createdAt).format('MMMM Do, YYYY')}</h3>
-            <h3>{numeral(obj.amount).format('$0,0.00')}</h3>
+            <h3> {obj.amount } </h3>
+            <h3>{numeral(obj.amount/100).format('$0,0.00')}</h3>
             <Link to="/" className="editLink"> Go back</Link>
             <Link to={`/edit/${id}`} className="editLink"> Edit</Link>
             <button onClick={onDeleteObject}> Delete </button>

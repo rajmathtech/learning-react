@@ -5,9 +5,6 @@ export default class ObjectForm extends React.Component {
   constructor(props) {
     super(props);
     const { title, details, amount, createdAt } = this.props.object;
-    // console.log(this.props.object[0]);
-    // console.log('details');
-    
     this.state = {
       title: title ? title : "",
       details: details ? details : "",
@@ -72,9 +69,6 @@ export default class ObjectForm extends React.Component {
     if (!this.state.amount) {
       this.setState(() => ({ error: "Please enter amount!" }));
     } else {
-      // this.setState(() => ({ amount:parseFloat(this.state.amount,10)*100 }));
-      // console.log(parseFloat(this.state.amount,10)*100);
-      // console.log(this.state.createdAt.valueOf());
       this.props.onSubmitForm({
         ...this.state,
         amount: parseFloat(this.state.amount, 10) * 100,

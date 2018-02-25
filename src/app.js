@@ -10,6 +10,7 @@ import {setText,
     setEndDate, 
     setStartDate} from './redux/actions/filter';
 import filteredObjects from './redux/selector/filteredObjects';
+import total from './redux/selector/totalAmountObjects';
 import storeObjects from './redux/store/configStore';
 import {Provider, connect} from 'react-redux';
 const appRoot = document.getElementById('appRoot');

@@ -3,8 +3,10 @@ import ObjectSingle from "./ObjectSingle";
 import { connect } from "react-redux";
 import filteredObjects from "../redux/selector/filteredObjects";
 import ObjectsFilter from "./ObjectsFilter";
+import AmountSummary from "./AmountSummary";
 export const Objects = props => (
   <div className="objects-container">
+    <AmountSummary {...props}/>
     <ObjectsFilter />
     {props.objects.length === 0 ? (
       <p> no object found! </p>
@@ -16,15 +18,9 @@ export const Objects = props => (
   </div>
 );
 
-const mapStateToProps = ({ objects, filter }) => {
-  // console.log(objects);
-  // console.log(filter);
-  // console.log(filteredObjects(objects, filter));
-  // console.log('-----');
-
-  return {
+const mapStateToProps = ({ objects, filter }) => ({
     objects: filteredObjects(objects, filter),
     filter
-  };
-};
+  });
+
 export default connect(mapStateToProps)(Objects);
