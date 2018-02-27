@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ObjectForm from '../ObjectForm';
-import { addObject } from '../../redux/actions/object';
+import { startAddObject } from '../../redux/actions/object';
 export class CreateObjectPage extends React.Component{
     onSubmitForm= (object) => {
-        this.props.addObject(object);
+        this.props.startAddObject(object);
         this.props.history.push('/'); 
      };
     render () {
@@ -16,7 +16,7 @@ export class CreateObjectPage extends React.Component{
 } 
 
 const mapDispatchToProps = (dispatch) => ({
-    addObject:(object)=>dispatch(addObject(object))
+    startAddObject:(object)=>dispatch(startAddObject(object))
 });
 
 export default connect(undefined, mapDispatchToProps)(CreateObjectPage);

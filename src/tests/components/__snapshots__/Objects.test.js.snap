@@ -4,6 +4,9 @@ exports[`should render with no objects passed 1`] = `
 <div
   className="objects-container"
 >
+  <AmountSummary
+    objects={Array []}
+  />
   <Connect(ObjectsFilter) />
   <p>
      no object found! 
@@ -15,6 +18,33 @@ exports[`should render with objects passed 1`] = `
 <div
   className="objects-container"
 >
+  <AmountSummary
+    objects={
+      Array [
+        Object {
+          "amount": 400,
+          "createdAt": -345600000,
+          "details": " details of object one",
+          "id": "1",
+          "title": "object one",
+        },
+        Object {
+          "amount": 300,
+          "createdAt": 0,
+          "details": " details of object two",
+          "id": "2",
+          "title": "object two",
+        },
+        Object {
+          "amount": 500,
+          "createdAt": 345600000,
+          "details": " details of object three",
+          "id": "3",
+          "title": "object three",
+        },
+      ]
+    }
+  />
   <Connect(ObjectsFilter) />
   <ObjectSingle
     key="1"

@@ -7,7 +7,7 @@ beforeEach(() => {
   addObjectSpy = jest.fn();
   historySpy = { push: jest.fn() };
   wrapper = shallow(
-    <CreateObjectPage addObject={addObjectSpy} history={historySpy} />
+    <CreateObjectPage startAddObject={addObjectSpy} history={historySpy} />
   );
 });
 test("shoukd render create object page component", () => {
