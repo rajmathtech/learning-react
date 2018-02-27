@@ -1,20 +1,5 @@
-//ADD_OBJECT
-// import uuid from 'uuid';
-// export const addObject = ({
-//     title='',
-//     details='',
-//     amount=0,
-//     createdAt=0
-// }={}) => ({
-//     type:'ADD_OBJECT', 
-//     object:{
-//         id:uuid(),
-//         title,
-//         details,
-//         amount,
-//         createdAt}
-// });
 import db from '../../firebase/firebase';
+//ADD_OBJECT
 export const addObject = (object) => ({
     type:'ADD_OBJECT', 
     object});
@@ -35,6 +20,24 @@ export const startAddObject = (objectData={}) => {
         });
     }
 }
+//GET_OBJECTS
+export const getObjects = (objects) => ({
+    type: 'GET_OBJECTS',
+    objects
+}); 
+export const startGetObjects = () =>{
+    return (dispatch) => {
+        const objectsData = [];
+        return db.ref('objects').once('value').then((snapshot) => {
+                snapshot.forEach( (childSnapshot) => {
+                    objectsData.push({id: childSnapshot.key,
+                        ...childSnapshot.val()
+                    });
+                });
+                dispatch(getObjects(objectsData));
+        });
+    }
+};
 //EDIT_OBJECT
 export const editObject = ({id}, updateTo)=>({
     type:'EDIT_OBJECT',

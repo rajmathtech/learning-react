@@ -4,7 +4,7 @@ import './styles/style.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import RoutesApp from './routers/RoutesApp';
-import {startAddObject, editObject, deleteObject} from './redux/actions/object';
+import {startAddObject, startGetObjects, editObject, deleteObject} from './redux/actions/object';
 import {setText, 
     setSortBy, 
     setEndDate, 
@@ -42,6 +42,9 @@ const appRoot = document.getElementById('appRoot');
 // }
 // const ConnectedCompo = connect(mapStateToProps)(Info);
 const jsx = (<Provider store={storeObjects}> 
-        <RoutesApp />
-    </Provider>);
-ReactDOM.render(jsx, appRoot);
+    <RoutesApp />
+</Provider>);
+ReactDOM.render(<p> Loading...</p>, appRoot);
+storeObjects.dispatch(startGetObjects()).then(() => {
+    ReactDOM.render(jsx, appRoot);
+});

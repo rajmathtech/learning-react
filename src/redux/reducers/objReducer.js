@@ -5,8 +5,8 @@
 //     amount:'',
 //     createdAt:0
 // }];
-const object = [];
-export default (state=object, action) => {
+const objects = [];
+export default (state=objects, action) => {
  switch(action.type) {
     case 'ADD_OBJECT':
         return [...state, action.object];
@@ -20,7 +20,9 @@ export default (state=object, action) => {
             return object;
         });   
     case 'DELETE_OBJECT':
-        return state.filter((object)=> action.id !== object.id);     
+        return state.filter((object)=> action.id !== object.id);  
+    case 'GET_OBJECTS':
+        return action.objects;
     default: 
         return state;
  }
