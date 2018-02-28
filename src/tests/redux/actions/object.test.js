@@ -1,4 +1,11 @@
-import {addObject, getObjects, editObject, deleteObject, startAddObject, getObject, startGetObjects} from '../../../redux/actions/object';
+import {addObject, 
+    getObjects, 
+    editObject, 
+    startDeleteObject,
+    deleteObject, 
+    startAddObject, 
+    getObject, 
+    startGetObjects} from '../../../redux/actions/object';
 import objects from '../../fixtures/objects';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
@@ -54,9 +61,9 @@ test('should edit object title', () => {
         updateTo, id: expect.any(String)
         });
 });
-//remove object
+//delete object
 test('should remove the object two', () => {
-    const remObj = deleteObject(objects[1]);
+    const remObj = deleteObject(objects[1].id);
     expect(remObj).toEqual({type:'DELETE_OBJECT', 
     ...remObj, id:expect.any(String)});
 });
@@ -114,4 +121,50 @@ test('should set default object to database and store', (done) => {
         done();
     });
 
+});
+//asyn delete
+test('should remove the object two from database and store: test remaining', (done) => {
+    const store = createMockStore(objects);
+    const id = objects[1].id;
+    store.dispatch(startDeleteObject(id)).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type:'DELETE_OBJECT', 
+            id
+        });
+        return db.ref(`objects`).once('value');
+    }).then((snapshot) => { 
+        const objs = [];
+        snapshot.forEach((childSnapshot) => {
+            objs.push({
+                id:childSnapshot.key,
+                ...childSnapshot.val()
+            });
+        });
+        expect(objs).toEqual([objects[0], objects[2]]);
+        done();
+    }).catch((er) => {
+        console.log(er); 
+        done();
+    });
+});
+//
+test('should remove the object two from database and store:test deleted', (done) => {
+    const store = createMockStore(objects);
+    const id = objects[1].id;
+    store.dispatch(startDeleteObject(id)).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type:'DELETE_OBJECT', 
+            id
+        });
+        return db.ref(`objects/id`).once('value');
+    }).then((snapshot) => { 
+        // expect(snapshot.val()).toEqual(null);
+        expect(snapshot.val()).toBeFalsy();
+        done();
+    }).catch((er) => {
+        console.log(er); 
+        done();
+    });
 });

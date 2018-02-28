@@ -45,7 +45,14 @@ export const editObject = ({id}, updateTo)=>({
     updateTo
 });
 //DELETE_OBJECT
-export const deleteObject = (({id}) => ({
+export const deleteObject = ((id) => ({
     type: 'DELETE_OBJECT',
     id
 }));
+export const startDeleteObject = (id) => {
+    return (dispatch) => {
+        return db.ref(`objects/${id}`).set(null).then(() => {
+            dispatch(deleteObject(id));
+        });
+    }
+}
