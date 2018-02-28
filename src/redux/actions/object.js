@@ -39,11 +39,18 @@ export const startGetObjects = () =>{
     }
 };
 //EDIT_OBJECT
-export const editObject = ({id}, updateTo)=>({
+export const editObject = (id, updateTo)=>({
     type:'EDIT_OBJECT',
     id,
     updateTo
 });
+export const startEditObject = (id, updateTo) => {
+    return (dispatch) => {
+        return db.ref(`objects/${id}`).update(updateTo).then(() => {
+            dispatch(editObject(id, updateTo));
+        });
+    }
+}
 //DELETE_OBJECT
 export const deleteObject = ((id) => ({
     type: 'DELETE_OBJECT',

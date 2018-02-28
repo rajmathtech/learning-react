@@ -1,6 +1,7 @@
 import {addObject, 
     getObjects, 
     editObject, 
+    startEditObject,
     startDeleteObject,
     deleteObject, 
     startAddObject, 
@@ -55,7 +56,7 @@ test('should get  objects from database', (done) => {
 test('should edit object title', () => {
     const obj = objects[0];
     const updateTo = {...obj, title:'edited object one'};
-    const editedObj = editObject(obj, updateTo);
+    const editedObj = editObject(obj.id, updateTo);
     expect(editedObj).toEqual({
         type:'EDIT_OBJECT',
         updateTo, id: expect.any(String)
@@ -162,6 +163,30 @@ test('should remove the object two from database and store:test deleted', (done)
     }).then((snapshot) => { 
         // expect(snapshot.val()).toEqual(null);
         expect(snapshot.val()).toBeFalsy();
+        done();
+    }).catch((er) => {
+        console.log(er); 
+        done();
+    });
+});
+//asyn edit 
+test('should edit the object one from database and store:test deleted', (done) => {
+    const store = createMockStore(objects);
+    const {id, title, details, amount, createdAt} = objects[0];
+    const updateTo = {title:'I am edited!',  
+    details, 
+    amount, 
+    createdAt};
+    store.dispatch(startEditObject(id, updateTo)).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type:'EDIT_OBJECT', 
+            id,
+            updateTo
+        });
+        return db.ref(`objects/${id}`).once('value');
+    }).then((snapshot) => { 
+        expect(snapshot.val()).toEqual(updateTo);
         done();
     }).catch((er) => {
         console.log(er); 

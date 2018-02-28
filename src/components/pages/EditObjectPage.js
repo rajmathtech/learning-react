@@ -1,14 +1,13 @@
 import React from 'react';
 import ObjectForm from '../ObjectForm';
 import {connect} from 'react-redux';
-import { editObject }  from '../../redux/actions/object';
+import { startEditObject }  from '../../redux/actions/object';
 export class EditObjectPage extends React.Component{
     onSubmitForm = (update) => {    
-        this.props.editObject(this.props.object, update);
+        this.props.startEditObject(this.props.object.id, update);
         this.props.history.push('/');
     };
-    render () {
-        
+    render () { 
     return (<div className="container__main">
     <h1 className="heading-primary"> Welcome to Edit Object</h1>
     <ObjectForm object={this.props.object} onSubmitForm={this.onSubmitForm}/>
@@ -16,7 +15,7 @@ export class EditObjectPage extends React.Component{
     }
 }
 const mapDispatchToProps = (dispatch) => ({
-    editObject: (obj, object) => dispatch(editObject(obj, object))
+    startEditObject: (id, update) => dispatch(startEditObject(id, update))
 })
  const mapStateToProps = (state, props) =>({
     object:state.objects.find((object) => object.id === props.match.params.id)
