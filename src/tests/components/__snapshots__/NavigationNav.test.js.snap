@@ -14,8 +14,7 @@ exports[`should render component 1`] = `
         activeClassName="active-link"
         ariaCurrent="true"
         className="navigation__link"
-        exact={true}
-        to="/"
+        to="/objects"
       >
         Home
       </NavLink>

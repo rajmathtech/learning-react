@@ -12,6 +12,8 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 const createMockStore = configureMockStore([thunk]);
 import db from '../../../firebase/firebase';
+const uid = 'some-test-user';
+const defaultState = {auth:{uid}};
 beforeEach((done) => {
     const objectsData = {};
     objects.forEach((object) => {
@@ -22,7 +24,7 @@ beforeEach((done) => {
             createdAt:object.createdAt
         };
     });
-    db.ref('objects').set(objectsData).then(() => {
+    db.ref(`users/${uid}/objects`).set(objectsData).then(() => {
         done();
     });
 });
@@ -41,7 +43,7 @@ test('should get objects', () => {
     expect(recieved).toEqual({type:'GET_OBJECTS', objects:[objects[0]]});
 });
 test('should get  objects from database', (done) => {
-    const store = createMockStore({});
+    const store = createMockStore(defaultState);
     store.dispatch(startGetObjects()).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toEqual({
@@ -70,7 +72,7 @@ test('should remove the object two', () => {
 });
 //asyn with database
 test('should set new object to database and store', (done) => {
-    const store = createMockStore({});
+    const store = createMockStore(defaultState);
     const object = {
         title:'store object',
         details: 'store details',
@@ -86,7 +88,7 @@ test('should set new object to database and store', (done) => {
                 ...object
             }
         });
-        return db.ref(`objects/${actions[0].object.id}`).once('value');
+        return db.ref(`users/${uid}/objects/${actions[0].object.id}`).once('value');
     }).then((snapshot) => { 
         expect(snapshot.val()).toEqual(object);
         done();
@@ -97,7 +99,7 @@ test('should set new object to database and store', (done) => {
 
 });
 test('should set default object to database and store', (done) => {
-    const store = createMockStore({});
+    const store = createMockStore(defaultState);
     const object = { 
         title:'',
         details:'',
@@ -113,7 +115,7 @@ test('should set default object to database and store', (done) => {
                 ...object
             }
         });
-        return db.ref(`objects/${actions[0].object.id}`).once('value');
+        return db.ref(`users/${uid}/objects/${actions[0].object.id}`).once('value');
     }).then((snapshot) => { 
         expect(snapshot.val()).toEqual(object);
         done();
@@ -125,7 +127,7 @@ test('should set default object to database and store', (done) => {
 });
 //asyn delete
 test('should remove the object two from database and store: test remaining', (done) => {
-    const store = createMockStore(objects);
+    const store = createMockStore(defaultState);
     const id = objects[1].id;
     store.dispatch(startDeleteObject(id)).then(() => {
         const actions = store.getActions();
@@ -133,7 +135,7 @@ test('should remove the object two from database and store: test remaining', (do
             type:'DELETE_OBJECT', 
             id
         });
-        return db.ref(`objects`).once('value');
+        return db.ref(`users/${uid}/objects`).once('value');
     }).then((snapshot) => { 
         const objs = [];
         snapshot.forEach((childSnapshot) => {
@@ -151,7 +153,7 @@ test('should remove the object two from database and store: test remaining', (do
 });
 //
 test('should remove the object two from database and store:test deleted', (done) => {
-    const store = createMockStore(objects);
+    const store = createMockStore(defaultState);
     const id = objects[1].id;
     store.dispatch(startDeleteObject(id)).then(() => {
         const actions = store.getActions();
@@ -159,7 +161,7 @@ test('should remove the object two from database and store:test deleted', (done)
             type:'DELETE_OBJECT', 
             id
         });
-        return db.ref(`objects/id`).once('value');
+        return db.ref(`users/${uid}/objects/id`).once('value');
     }).then((snapshot) => { 
         // expect(snapshot.val()).toEqual(null);
         expect(snapshot.val()).toBeFalsy();
@@ -171,7 +173,7 @@ test('should remove the object two from database and store:test deleted', (done)
 });
 //asyn edit 
 test('should edit the object one from database and store:test deleted', (done) => {
-    const store = createMockStore(objects);
+    const store = createMockStore(defaultState);
     const {id, title, details, amount, createdAt} = objects[0];
     const updateTo = {title:'I am edited!',  
     details, 
@@ -184,7 +186,7 @@ test('should edit the object one from database and store:test deleted', (done) =
             id,
             updateTo
         });
-        return db.ref(`objects/${id}`).once('value');
+        return db.ref(`users/${uid}/objects/${id}`).once('value');
     }).then((snapshot) => { 
         expect(snapshot.val()).toEqual(updateTo);
         done();

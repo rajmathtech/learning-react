@@ -10,9 +10,10 @@ export const startAddObject = (objectData={}) => {
             amount=0,
             createdAt=0} = objectData;
     const object = { title, details, amount, createdAt};
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         //promise chainnig to be in test
-       return db.ref('objects').push(object).then((ref) => {
+       return db.ref(`users/${uid}/objects`).push(object).then((ref) => {
              dispatch(addObject({id: ref.key,
             ...object}));   
         }).catch((er) => {
@@ -26,9 +27,10 @@ export const getObjects = (objects) => ({
     objects
 }); 
 export const startGetObjects = () =>{
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         const objectsData = [];
-        return db.ref('objects').once('value').then((snapshot) => {
+        return db.ref(`users/${uid}/objects`).once('value').then((snapshot) => {
                 snapshot.forEach( (childSnapshot) => {
                     objectsData.push({id: childSnapshot.key,
                         ...childSnapshot.val()
@@ -45,8 +47,9 @@ export const editObject = (id, updateTo)=>({
     updateTo
 });
 export const startEditObject = (id, updateTo) => {
-    return (dispatch) => {
-        return db.ref(`objects/${id}`).update(updateTo).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return db.ref(`users/${uid}/objects/${id}`).update(updateTo).then(() => {
             dispatch(editObject(id, updateTo));
         });
     }
@@ -57,8 +60,9 @@ export const deleteObject = ((id) => ({
     id
 }));
 export const startDeleteObject = (id) => {
-    return (dispatch) => {
-        return db.ref(`objects/${id}`).set(null).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return db.ref(`users/${uid}/objects/${id}`).set(null).then(() => {
             dispatch(deleteObject(id));
         });
     }
