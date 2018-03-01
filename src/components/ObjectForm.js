@@ -66,8 +66,8 @@ export default class ObjectForm extends React.Component {
   onSubmitForm = e => {
     e.preventDefault();
 
-    if (!this.state.amount) {
-      this.setState(() => ({ error: "Please enter amount!" }));
+    if (!this.state.amount || !this.state.title) {
+      this.setState(() => ({ error: "Please enter title and amount!" }));
     } else {
       this.props.onSubmitForm({
         ...this.state,
