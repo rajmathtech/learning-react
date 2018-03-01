@@ -32,6 +32,15 @@ exports[`should render component 1`] = `
         Create
       </NavLink>
     </li>
+    <li
+      className="navigation__item"
+    >
+      <button
+        onClick={[Function]}
+      >
+         Logout 
+      </button>
+    </li>
   </ul>
 </nav>
 `;

@@ -1,23 +1,27 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router, Switch, Route} from 'react-router-dom';
+import creatHistory from 'history/createBrowserHistory';
+import LoginPage from '../components/pages/LoginPage';
 import ObjectsPage from '../components/pages/ObjectsPage';
 import CreateObjectPage from '../components/pages/CreateObjectPage';
 import DisplayObjectPage from '../components/pages/DisplayObjectPage';
 import EditObjectPage from '../components/pages/EditObjectPage';
 import PageNotFound from '../components/pages/PageNotFound';
-import NavigationNav from '../components/NavigationNav';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+export const history = creatHistory();
 const RoutesApp = ()=> (
-    <BrowserRouter> 
+    <Router history={history}> 
         <div className="container">
-            <NavigationNav />
             <Switch>
-                <Route exact path='/' component={ObjectsPage}/>  
-                <Route exact path='/create' component={CreateObjectPage}/>
-                <Route path='/display/:id' component={DisplayObjectPage}/>
-                <Route path='/edit/:id' component={EditObjectPage}/>
+                <PublicRoute exact path='/' component={LoginPage}/>
+                <PrivateRoute exact path='/objects' component={ObjectsPage}/>  
+                <PrivateRoute exact path='/create' component={CreateObjectPage}/>
+                <PrivateRoute path='/display/:id' component={DisplayObjectPage}/>
+                <PrivateRoute path='/edit/:id' component={EditObjectPage}/>
                 <Route component={PageNotFound}/> 
             </Switch>
         </div>
-    </BrowserRouter>
+    </Router>
 );
 export default RoutesApp;

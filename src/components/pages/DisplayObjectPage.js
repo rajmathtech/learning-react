@@ -10,7 +10,7 @@ const DisplayObjectPage = (props) => {
         props.history.push('/');  
     }
     const {id, title, details, amount, createdAt} = props.object;
-    return  (<div className="popup" id="popup"> 
+    return  (<div className="popup"> 
         <div className="popup__content">
             <h1> Welcome to Edit Object Page</h1>
             <h2>{title}</h2>
