@@ -996,7 +996,7 @@ exports[`should set error on invalid form submission 2`] = `
     from Object form 
   </h1>
   <h2>
-    Please enter amount!
+    Please enter title and amount!
   </h2>
   <form
     onSubmit={[Function]}
